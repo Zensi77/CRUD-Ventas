@@ -1,5 +1,13 @@
 package com.jer.base_de_datos;
 
+/**
+ * Clase que contiene las rutas de las imagenes y los tipos de vistas que se pueden mostrar en la aplicacion
+ * Tambien contiene las dimensiones de los botones de la vista de productos
+ *
+ * @author Juanma Espinola
+ * @version 1.0
+ * @date 2024-04-12
+ */
 public class Constants {
 
     public static final String rutaImgLapiz = "C:\\Users\\USUARIO\\Desktop\\Base_datos\\src\\main\\resources\\images\\lapiz.png";

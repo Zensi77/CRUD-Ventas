@@ -32,6 +32,13 @@ import java.util.Optional;
 import static com.jer.base_de_datos.Constants.rutaImgLapiz;
 import static com.jer.base_de_datos.StartController.showAlert;
 
+/**
+ * Clase VentasController, controlador de la vista ventas-view
+ * Esta clase se encarga de gestionar las ventas, los clientes y los productos
+ * author Juanma Espínola
+ * version 1.0
+ * date 2024-04-12
+ */
 public class VentasController {
     @FXML
     private ScrollPane miScrollPane;
@@ -46,28 +53,10 @@ public class VentasController {
     private Button guardarCompra;
 
     @FXML
-    private Button insertCompran;
-
-    @FXML
-    private Button insertProductos;
-
-    @FXML
     private Label labelPrincipal;
 
     @FXML
-    private Button queryArticle;
-
-    @FXML
-    private Button queryCliente;
-
-    @FXML
-    private Button showArticles;
-
-    @FXML
     private TextField busqueda;
-
-    @FXML
-    private ImageView busquedaImg;
 
     @FXML
     private Label idClientes;
@@ -77,8 +66,10 @@ public class VentasController {
     private Clientes cl;
     private Productos pr;
 
-    private HelloApplication helloApplication = new HelloApplication();
-
+    /**
+     * Método que se ejecuta al cargar la vista, inicializa las tablas y las oculta hasta que se muestren
+     * Tambien inicializa los modelos de datos
+     */
     @FXML
     public void initialize() {
         //Inicialmente oculto las tablas
@@ -91,8 +82,11 @@ public class VentasController {
         pr = new Productos();
     }
 
+    /**
+     * Método que crea la tabla Compran, si no existe llama al método de la clase Clientes
+     */
     @FXML
-    public void createCompran(ActionEvent event) {
+    public void createCompran() {
         int res = cl.crearTabla();
         if (res == 1) {
             showAlert("Crear Tabla", null, "Tabla Compran creada con éxito", Alert.AlertType.INFORMATION).showAndWait();
@@ -103,8 +97,12 @@ public class VentasController {
         }
     }
 
+    /**
+     * Metodo para insertar un cliente en la base de datos, abre una ventana modal para insertar los datos, la cual
+     * se cierra al guardar los datos y gestiona la inserción de los datos del clien en la base de datos
+     */
     @FXML
-    public void insertCliente(ActionEvent event) {
+    public void insertCliente() {
         guardarCompra.setVisible(false); // Oculto el botón de guardar compra
         idClientes.setText(""); // Borro el id del cliente para poder realizar una nueva compra
 
@@ -120,8 +118,12 @@ public class VentasController {
         stage.showAndWait();
     }
 
+    /**
+     * Metodo para insertar un producto en la base de datos, abre una ventana modal para insertar los datos, la cual
+     * se cierra al guardar los datos y gestiona la inserción de los datos del producto en la base de datos
+     */
     @FXML
-    public void insertProductos(ActionEvent event) {
+    public void insertProductos() {
         guardarCompra.setVisible(false); // Oculto el botón de guardar compra
         idClientes.setText(""); // Borro el id del cliente para poder realizar una nueva compra
 
@@ -138,6 +140,13 @@ public class VentasController {
         stage.showAndWait();
     }
 
+    /**
+     * Metodo para mostrar los productos en la tabla de productos, si hay un cliente seleccionado, muestra un checkbox
+     * y un spinner para poder añadir productos a la compra, si no hay un cliente seleccionado, solo muestra la imagen para modificar
+     * los datos del producto
+     *
+     * @throws SQLException Excepción que se lanza si hay un error al obtener los productos
+     */
     @FXML
     public void showProductos() throws SQLException {
         labelPrincipal.setText("Productos");
@@ -145,6 +154,7 @@ public class VentasController {
         gridClientes.setVisible(false);
         gridBusqueda.setVisible(false);
 
+        // Borro todos los elementos de la tabla
         gridProductos.getChildren().removeIf(node -> GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) > 1);
 
         // añado un scrollPane para que se pueda ver la tabla entera
@@ -153,18 +163,18 @@ public class VentasController {
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
 
-        ResultSet rs = pr.getAllProducts();
+        ResultSet rs = pr.getAllProducts(); // Obtengo todos los productos de la base de datos
         while (rs.next()) {
             int id = rs.getInt(1);
 
-            ImageView lapizImg = new ImageView("file:" + rutaImgLapiz);
+            ImageView lapizImg = new ImageView("file:" + rutaImgLapiz); // Imagen para modificar los datos del producto
             lapizImg.setFitHeight(Constants.prefHeightButtonGrid);
             lapizImg.setFitWidth(Constants.prefWitdhButtonGrid);
             lapizImg.setOnMouseClicked((MouseEvent event) -> {
                 obtenerDatos(id, Constants.tipoVistaProducto);
             });
 
-            CheckBox checkBox = new CheckBox();
+            CheckBox checkBox = new CheckBox(); // Creo un checkbox para añadir productos a la compra
             checkBox.setId(String.valueOf(id));
 
             HBox container = new HBox(); // Creo un contenedor para el checkbox y la imagen
@@ -189,10 +199,14 @@ public class VentasController {
                     new Label(String.valueOf(rs.getInt(4)))
             );
         }
-        miScrollPane.setContent(gridProductos);
+        miScrollPane.setContent(gridProductos); // Añado la tabla de productos al scrollPane
     }
 
-
+    /**
+     * Metodo para mostrar los clientes en la tabla de clientes, muestra tres imagenes, una para modificar los datos
+     * del cliente y otra para ver las ventas del cliente y otra para realizar una compra.
+     * Si se pulsa en la imagen de la compra, se abre la ventana de productos para poder añadir productos a la compra
+     */
     @FXML
     public void showClientes() {
         labelPrincipal.setText("Clientes");
@@ -202,13 +216,15 @@ public class VentasController {
         guardarCompra.setVisible(false);
         idClientes.setText(""); // Borro el id del cliente para poder realizar una nueva compra
 
+        // Borro todos los elementos de la tabla
         gridClientes.getChildren().removeIf(node -> GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) > 1);
 
-        ResultSet rs = cl.getALLClientes();
+        ResultSet rs = cl.getALLClientes(); // Obtengo todos los clientes de la base de datos
         try {
             while (rs.next()) {
                 int id = rs.getInt(1);
 
+                // Creo las imagenes para modificar los datos del cliente, ver las ventas y realizar una compra
                 ImageView lapizImg = new ImageView("file:" + Constants.rutaImgLapiz);
                 lapizImg.setFitHeight(20);
                 lapizImg.setFitWidth(20);
@@ -249,12 +265,18 @@ public class VentasController {
                 );
             }
 
-            miScrollPane.setContent(gridClientes);
+            miScrollPane.setContent(gridClientes); // Añado la tabla de clientes al scrollPane
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Metodo para guardar la compra, recorre todos los elementos del grid productos de la tabla de productos y si el checkbox está seleccionado
+     * añade el producto a la compra con la cantidad seleccionada en el spinner
+     * Muestra un mensaje de error si no se ha podido realizar la compra
+     * Muestra un mensaje de éxito si se ha realizado la compra correctamente
+     */
     @FXML
     public void guardarCompra() {
         ObservableList<Node> objects = gridProductos.getChildren(); // Obtengo todos los nodos de la tabla de productos
@@ -283,12 +305,26 @@ public class VentasController {
         }
     }
 
+    /**
+     * Metodo para realizar una compra, muestra la tabla de productos para poder añadir productos a la compra
+     * Metodo intermedio para poder guardar el id del cliente y poder realizar la compra
+     *
+     * @param id
+     * @throws SQLException
+     */
     private void realizarCompra(int id) throws SQLException {
         idClientes.setText(String.valueOf(id)); // Guardo el id del cliente para poder realizar la compra
         guardarCompra.setVisible(true); // Muestro el botón de agregar compra
         showProductos();
     }
 
+    /**
+     * Metodo para obtener los datos de un cliente o un producto, a este metodo se le pasa el id y el tipo de vista
+     * para poder mostrar los datos del cliente o del producto
+     *
+     * @param id   id del cliente o del producto
+     * @param tipo tipo de vista, cliente o producto
+     */
     private void obtenerDatos(int id, String tipo) {
         try {
             Scene scene = labelPrincipal.getScene();
@@ -302,6 +338,11 @@ public class VentasController {
         }
     }
 
+    /**
+     * Metodo para obtener las compras de un cliente, a este metodo se le pasa el id del cliente
+     *
+     * @param id id del cliente
+     */
     private void obtenerVentas(int id) {
         try {
             Scene scene = labelPrincipal.getScene();
@@ -315,6 +356,12 @@ public class VentasController {
         }
     }
 
+    /**
+     * Metodo para buscar un producto o un cliente, muestra los resultados de la busqueda en la tabla de busqueda
+     * Desde esta busqueda se puede modificar los datos del producto o del cliente, ver las ventas del cliente o realizar una compra
+     * Clientes estan representados con una imagen de cliente, un lapiz para modificar los datos, un ojo para ver las ventas y un carrito para realizar una compra
+     * Productos estan representados con una imagen de producto y un lapiz para modificar los datos
+     */
     @FXML
     public void busqueda() {
         gridClientes.setVisible(false);
@@ -336,17 +383,19 @@ public class VentasController {
                 gridBusqueda.setHgap(10);
 
                 gridBusqueda.getChildren().removeIf(node -> GridPane.getRowIndex(node) != null); //? Borro todos los elementos de la tabla
-                if (rsProducto != null) {
+                if (rsProducto != null) { // Si hay productos, los muestro
 
+                    // Establezco el encabezado de los productos
                     Label titulo = new Label("Productos");
                     titulo.setStyle("-fx-font-weight: bold; -fx-font-size: 20");
 
                     gridBusqueda.addRow(0, titulo);
                     gridBusqueda.addRow(1, new Label(), new Label("ID"), new Label("Nombre"), new Label("Descripcion"), new Label("PVP"));
 
-                    while (rsProducto.next()) {
+                    while (rsProducto.next()) { // Recorro todos los productos encontrados y los muestro
                         int id = rsProducto.getInt(1);
 
+                        // Creo las imagenes para modificar los datos del producto
                         ImageView lapizImg = new ImageView("file:" + Constants.rutaImgLapiz);
                         lapizImg.setFitHeight(Constants.prefHeightButtonGrid);
                         lapizImg.setFitWidth(Constants.prefWitdhButtonGrid);
@@ -354,13 +403,16 @@ public class VentasController {
                             obtenerDatos(id, Constants.tipoVistaProducto);
                         });
 
+                        // Creo la imagen del producto
                         ImageView productoImg = new ImageView("file:" + Constants.rutaImgProducto);
                         productoImg.setFitHeight(Constants.prefHeightButtonGrid);
                         productoImg.setFitWidth(Constants.prefWitdhButtonGrid);
 
+                        // Añado las imagenes al contenedor
                         HBox container = new HBox(productoImg); // Creo un contenedor para todas las imagenes
                         container.getChildren().add(lapizImg);
 
+                        // Añado los elementos a la tabla de busqueda
                         gridBusqueda.addRow(
                                 gridBusqueda.getRowCount(),
                                 container,
@@ -372,7 +424,9 @@ public class VentasController {
                     }
                 }
 
-                if (rsCliente != null) {
+                if (rsCliente != null) { // Si hay clientes, los muestro
+
+                    // Establezco el encabezado de los clientes
                     Label titulo = new Label("Clientes");
                     titulo.setStyle("-fx-font-weight: bold; -fx-font-size: 20");
                     titulo.setPrefSize(100, 20);
@@ -380,9 +434,10 @@ public class VentasController {
                     gridBusqueda.addRow(gridBusqueda.getRowCount(), titulo);
                     gridBusqueda.addRow(gridBusqueda.getRowCount(), new Label(), new Label("ID"), new Label("Nombre"), new Label("Apellido 1"), new Label("Apellido 2"));
 
-                    while (rsCliente.next()) {
-                        int id = rsCliente.getInt(1);
+                    while (rsCliente.next()) { // Recorro todos los clientes encontrados y los muestro
+                        int id = rsCliente.getInt(1); // Obtengo el id del cliente
 
+                        // Creo las imagenes para modificar los datos del cliente, ver las ventas y realizar una compra
                         ImageView lapizImg = new ImageView("file:" + Constants.rutaImgLapiz);
                         lapizImg.setFitHeight(Constants.prefHeightButtonGrid);
                         lapizImg.setFitWidth(Constants.prefWitdhButtonGrid);
@@ -390,10 +445,12 @@ public class VentasController {
                             obtenerDatos(id, Constants.tipoVistaCliente);
                         });
 
+                        // Creo la imagen del cliente
                         ImageView clienteImg = new ImageView("file:" + Constants.rutaImgCliente);
                         clienteImg.setFitHeight(Constants.prefHeightButtonGrid);
                         clienteImg.setFitWidth(Constants.prefWitdhButtonGrid);
 
+                        // Creo las imagenes para ver las ventas
                         ImageView ojoImg = new ImageView("file:" + Constants.rutaImgOjo);
                         ojoImg.setFitHeight(Constants.prefHeightButtonGrid);
                         ojoImg.setFitWidth(Constants.prefWitdhButtonGrid);
@@ -401,6 +458,7 @@ public class VentasController {
                             obtenerVentas(id);
                         });
 
+                        // Creo la imagen para realizar una compra
                         ImageView carritoCompraImg = new ImageView("file:" + Constants.rutaImgCarrito);
                         carritoCompraImg.setFitHeight(Constants.prefHeightButtonGrid);
                         carritoCompraImg.setFitWidth(Constants.prefWitdhButtonGrid);
@@ -412,11 +470,13 @@ public class VentasController {
                             }
                         });
 
+                        // Añado las imagenes al contenedor
                         HBox container = new HBox(clienteImg); // Creo un contenedor para todas las imagenes
                         container.getChildren().add(lapizImg);
                         container.getChildren().add(ojoImg);
                         container.getChildren().add(carritoCompraImg);
 
+                        // Añado los elementos a la tabla de busqueda
                         gridBusqueda.addRow(
                                 gridBusqueda.getRowCount(),
                                 container,
@@ -427,7 +487,7 @@ public class VentasController {
                         );
                     }
                 }
-                miScrollPane.setContent(gridBusqueda);
+                miScrollPane.setContent(gridBusqueda); // Añado la tabla de busqueda al scrollPane
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -436,8 +496,13 @@ public class VentasController {
 
 
     //! Metodos del menu
+
+    /**
+     * Metodo para conectar a la base de datos, abre una ventana modal para introducir los datos de la base de datos
+     * y se cierra al guardar los datos y conectarse a la base de datos
+     */
     @FXML
-    public void conectarBD(ActionEvent event) {
+    public void conectarBD() {
         Stage paginaVentas = (Stage) labelPrincipal.getScene().getWindow();
         paginaVentas.close();
 
@@ -450,8 +515,13 @@ public class VentasController {
         stage.show();
     }
 
+    /**
+     * Metodo para restablecer la base de datos, muestra un mensaje de confirmación para restablecer la base de datos
+     * y si el usuario pulsa aceptar, borra la base de datos
+     * Restablece la base de datos a su estado inicial, sin datos
+     */
     @FXML
-    public void restablecerBD(ActionEvent event) {
+    public void restablecerBD() {
         if (mostrarConfirmation("Restablecer Base de Datos", null, "¿Está seguro de que desea restablecer la Base de Datos?", Alert.AlertType.CONFIRMATION)) { // Si el usuario pulsa aceptar, borramos el fichero
             if (cl.borrarBD() == 1) {
                 showAlert("Restablecer Base de Datos", null, "Base de Datos restablecida con éxito", Alert.AlertType.INFORMATION).showAndWait();
@@ -461,15 +531,23 @@ public class VentasController {
         }
     }
 
+    /**
+     * Metodo para borrar una tabla, muestra un mensaje de confirmación para borrar la tabla
+     * y si el usuario pulsa aceptar, borra la tabla
+     * Si se borra tabla productos, se borran las tablas clientes y compran
+     * Si se borra tabla clientes, se borra la tabla compran
+     *
+     * @param event evento que se produce al pulsar en el menú
+     */
     @FXML
     public void deleteTabla(ActionEvent event) {
-        MenuItem buttonClicked = (MenuItem) event.getSource();
+        MenuItem buttonClicked = (MenuItem) event.getSource(); // Obtengo el botón pulsado
         int res;
-        if (buttonClicked.getText().equals("Productos")) {
+        if (buttonClicked.getText().equals("Productos")) { // Si se pulsa en productos, borro la tabla productos
             res = cl.borrarTabla("Productos");
-        } else if (buttonClicked.getText().equals("Clientes")) {
+        } else if (buttonClicked.getText().equals("Clientes")) { // Si se pulsa en clientes, borro la tabla clientes
             res = cl.borrarTabla("Clientes");
-        } else {
+        } else { // Si se pulsa en compran, borro la tabla compran
             res = cl.borrarTabla("Compran");
         }
 
@@ -480,6 +558,12 @@ public class VentasController {
         }
     }
 
+    /**
+     * Metodo para mostrar información sobre el autor, muestra un mensaje de confirmación para abrir el enlace en el navegador
+     * y si el usuario pulsa aceptar, abre el enlace en el navegador
+     *
+     * @param event evento que se produce al pulsar en el menú
+     */
     @FXML
     public void aboutAs(ActionEvent event) {
         MenuItem menuItem = (MenuItem) event.getSource();
@@ -487,15 +571,16 @@ public class VentasController {
 
         String url = "";
 
-        if (text.equals("GitHub")) {
+        if (text.equals("GitHub")) { // Si se pulsa en GitHub, se abre el enlace de GitHub
             url = "https://github.com/Zensi77";
-        } else if (text.equals("Linkedin")) {
+        } else if (text.equals("Linkedin")) { // Si se pulsa en Linkedin, se abre el enlace de Linkedin
             url = "https://www.linkedin.com/in/juan-manuel-espinola-rodriguez/";
         }
 
+        // Muestro un mensaje de confirmación para abrir el enlace en el navegador
         if (mostrarConfirmation("Redes Sociales", null, "¿Desea abrir el enlace en el navegador?", Alert.AlertType.CONFIRMATION)) {
             try {
-                Desktop.getDesktop().browse(new URI(url));
+                Desktop.getDesktop().browse(new URI(url)); // Abro el enlace en el navegador
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
@@ -504,15 +589,25 @@ public class VentasController {
 
     }
 
+    /**
+     * Metodo para crear un mensaje personalizado de confirmación
+     *
+     * @param title
+     * @param header
+     * @param content
+     * @param type
+     * @return
+     */
     private boolean mostrarConfirmation(String title, String header, String content, Alert.AlertType type) {
         boolean confirmation = false;
         Alert alert = showAlert(title, header, content, type);
 
-        alert.getButtonTypes().clear();
-        alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO);
+        alert.getButtonTypes().clear(); // Borro los botones por defecto
+        alert.getButtonTypes().addAll(ButtonType.YES, ButtonType.NO); // Añado los botones de aceptar y cancelar
 
-        Optional<ButtonType> resultado = alert.showAndWait();
+        Optional<ButtonType> resultado = alert.showAndWait(); // Muestro el mensaje de confirmación
 
+        // Si el usuario pulsa aceptar, devuelvo true
         if (resultado.isPresent() && resultado.get() == ButtonType.YES) {
             confirmation = true;
         }
@@ -520,6 +615,16 @@ public class VentasController {
         return confirmation;
     }
 
+    /**
+     * Metodo para crear una ventana modal
+     *
+     * @param fxml   nombre del archivo fxml
+     * @param title  título de la ventana
+     * @param modal  si la ventana es modal o no
+     * @param width  ancho de la ventana
+     * @param height alto de la ventana
+     * @return Pair<Stage, T> Devuelve un par con el stage y el controlador de la ventana
+     */
     public <T> Pair<Stage, T> createWindow(String fxml, String title, boolean modal, int width, int height) {
         Stage stage = null;
         T controller = null;

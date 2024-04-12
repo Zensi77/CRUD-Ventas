@@ -9,10 +9,23 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Clase que inicia la aplicacion
+ *
+ * @version 1.0
+ * @autor Juanma Espinola
+ * @date 2024/04/12
+ */
 public class HelloApplication extends Application {
     @FXML
     private static Scene scene;
 
+    /**
+     * Metodo que inicia la aplicacion
+     *
+     * @param stage Ventana principal
+     * @throws IOException Excepcion de entrada/salida
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("start-view.fxml"));
@@ -30,10 +43,23 @@ public class HelloApplication extends Application {
         launch();
     }
 
+    /**
+     * Metodo que carga la vista
+     *
+     * @param fxml Vista a cargar
+     * @throws IOException Excepcion de entrada/salida
+     */
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
+    /**
+     * Metodo que carga el archivo fxml
+     *
+     * @param fxml
+     * @return Devuelve el archivo fxml
+     * @throws IOException
+     */
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();

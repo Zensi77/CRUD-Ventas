@@ -10,7 +10,14 @@ import javafx.stage.Stage;
 
 import static com.jer.base_de_datos.StartController.showAlert;
 
-
+/**
+ * Controlador de la ventana de inserción de datos
+ * Se encarga de insertar los datos en la base de datos
+ *
+ * @author Juanma Espinola
+ * @version 1.0
+ * @date 2024/04/12
+ */
 public class InsertDatosController {
     private String datos;
 
@@ -27,9 +34,6 @@ public class InsertDatosController {
     private TextField campo3;
 
     @FXML
-    private Label txt1;
-
-    @FXML
     private Label txt2;
 
     @FXML
@@ -44,23 +48,34 @@ public class InsertDatosController {
     @FXML
     private Button buttonCancelar;
 
+    /**
+     * Inicializa la ventana de inserción de datos
+     */
     @FXML
     private void initialize() {
+        // Ocultamos los warnings
         warningNombre.setVisible(false);
         warningApe1.setVisible(false);
         warningApe2.setVisible(false);
     }
 
+    /**
+     * Guarda los datos introducidos en la ventana de inserción
+     * Si los datos son correctos, se insertan en la base de datos
+     * Si no, se muestra el warning correspondiente
+     */
     @FXML
     private void guardar() {
         initialize();
         if (campo1.getText().isEmpty()) {
             warningNombre.setVisible(true);
-        } if (campo2.getText().isEmpty()) {
+        }
+        if (campo2.getText().isEmpty()) {
             warningApe1.setVisible(true);
-        } if (campo3.getText().isEmpty() || !campo3.getText().matches("[0-9]+")) {
+        }
+        if (campo3.getText().isEmpty() || !campo3.getText().matches("[0-9]+")) { // Solo números enteros o vacío
             warningApe2.setVisible(true);
-        } else if (datos.equals(Constants.tipoVistaCliente)) {
+        } else if (datos.equals(Constants.tipoVistaCliente)) { // Si es un cliente
             Clientes cl = new Clientes();
             if (cl.insertarCliente(0, campo1.getText(), campo2.getText(), campo3.getText(), true)) {
                 showAlert("Correcto", null, "Cliente insertado correctamente", Alert.AlertType.INFORMATION).showAndWait();
@@ -69,7 +84,7 @@ public class InsertDatosController {
             } else {
                 showAlert("Error", null, "Error al insertar el cliente", Alert.AlertType.ERROR).showAndWait();
             }
-        } else if (datos.equals(Constants.tipoVistaProducto)) {
+        } else if (datos.equals(Constants.tipoVistaProducto)) { // Si es un producto
             Productos pr = new Productos();
             if (pr.insertarProducto(0, campo1.getText(), campo2.getText(), Integer.parseInt(campo3.getText()), true)) {
                 initialize();
@@ -82,18 +97,27 @@ public class InsertDatosController {
         }
     }
 
-
+    /**
+     * Cierra la ventana de inserción de datos
+     * Se ejecuta al pulsar el botón de cancelar
+     */
     @FXML
     private void cancelar() {
         Stage miVentana = (Stage) buttonCancelar.getScene().getWindow();
         miVentana.close();
     }
 
+    /**
+     * Establece el tipo de datos que se van a insertar y ajusta los textos de la ventana
+     * Se ejecuta al abrir la ventana de inserción
+     *
+     * @param datos Tipo de datos
+     */
     public void setTipo(String datos) {
         this.datos = datos;
-        if (datos.equals(Constants.tipoVistaCliente)) {
+        if (datos.equals(Constants.tipoVistaCliente)) { // Si son clientes
             txtPrincipal.setText(txtPrincipal.getText() + " clientes");
-        } else if (datos.equals(Constants.tipoVistaProducto)) {
+        } else if (datos.equals(Constants.tipoVistaProducto)) { // Si son productos
             txtPrincipal.setText(txtPrincipal.getText() + " productos");
             txt2.setText("Descripcion");
             txt3.setText("PVP");

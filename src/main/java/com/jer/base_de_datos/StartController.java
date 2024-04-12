@@ -1,6 +1,5 @@
 package com.jer.base_de_datos;
 
-import com.jer.base_de_datos.Datos;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,24 +7,32 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.sql.*;
 
+/**
+ * Clase que se encarga de establecer la conexión con la base de datos
+ * y de cargar las ventanas de la aplicación
+ *
+ * @author Juanma Espinola
+ * @version 1.0
+ * @date 2024-04-12
+ */
 public class StartController {
     @FXML
     private TextField direccion, user, password;
 
-    @FXML
-    private Button selectdB;
-
-    @FXML
-    private Button standardB;
-
     private Datos datos = new Datos();
 
+    /**
+     * Método que se ejecuta al pulsar el botón de seleccionar base de datos
+     * o el botón de usar la base de datos ventas
+     *
+     * @param event
+     */
     @FXML
     public void selectDb(ActionEvent event) {
-        Statement stmt = null;
         Button clickedButton = (Button) event.getSource(); // Vamos a ver que boton es el que se ha presionado
         if (clickedButton.getText().equals("Aceptar")) { // Si se ha presionado el boton de seleccionar base de datos
             cargarBD();
@@ -34,6 +41,12 @@ public class StartController {
         }
     }
 
+    /**
+     * Método que se encarga de cargar la base de datos Ventas
+     *
+     * @param message boolean que indica si se debe mostrar un mensaje de éxito o no
+     * @return con Connection con la base de datos Ventas
+     */
     @FXML
     public static Connection cargaVentas(boolean message) {
         Connection con = null;
@@ -49,6 +62,12 @@ public class StartController {
         return con;
     }
 
+    /**
+     * Método que se encarga de cargar la base de datos introducida por el usuario
+     * Al establecer la conexión con la base de datos, se muestra un dialogo con un comboBox con las bases de datos
+     *
+     * @return con Connection con la base de datos introducida por el usuario
+     */
     public void cargarBD() {
         if (user.getText().isEmpty() || password.getText().isEmpty()) {
             showAlert("Error", null, "Debe rellenar todos los campos", Alert.AlertType.ERROR).showAndWait();
@@ -80,7 +99,7 @@ public class StartController {
                     comboBox.setPrefWidth(30);
                     dialog.getDialogPane().setContent(comboBox);
                     dialog.setWidth(300);
-                    dialog.setHeight(50);
+                    dialog.setHeight(200);
                     dialog.showAndWait();
 
                     // Creo la conexión con la base de datos seleccionada
@@ -88,14 +107,20 @@ public class StartController {
 
                     if (con != null) {
                         showAlert("Conexión", null, "Conexión establecida con éxito", Alert.AlertType.INFORMATION).showAndWait();
+                        showAlert("Funcion no implementada", null, "Lamentablemente esta función esta disponiblw.\nEsta funcion sera implementada en proximas versiones de la aplicacion", Alert.AlertType.INFORMATION).showAndWait();
                     }
                 }
             } catch (SQLException e) {
-                showAlert("Error", null, "Error al conectar con la base de datos", Alert.AlertType.ERROR).showAndWait();
+                showAlert("Error", null, "Debes seleccionar la base de datos a la que deseas conectar", Alert.AlertType.ERROR).showAndWait();
             }
         }
     }
 
+    /**
+     * Método que se encarga de cargar las ventanas de la aplicación
+     *
+     * @param fxml nombre del archivo fxml
+     */
     private void cargarVentana(String fxml) {
         // Cerramos la ventana actual
         Stage paginaPrincipal = (Stage) direccion.getScene().getWindow();
@@ -119,6 +144,15 @@ public class StartController {
         }
     }
 
+    /**
+     * Método que se encarga de mostrar un mensaje de alerta
+     *
+     * @param title     título del mensaje
+     * @param header    cabecera del mensaje
+     * @param content   contenido del mensaje
+     * @param alertType tipo de mensaje
+     * @return alerta
+     */
     public static Alert showAlert(String title, String header, String content, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);

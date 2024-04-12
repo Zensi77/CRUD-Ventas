@@ -1,22 +1,21 @@
 package com.jer.base_de_datos;
 
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import static com.jer.base_de_datos.StartController.cargaVentas;
 
 
 public class Productos {
 
-    private int id;
-    private String nombre;
-    private String descripcion;
-    private int pvp;
-    private Connection con;
     private Statement stmt;
 
+    /**
+     * Constructor de la clase Productos
+     * Inicializa el objeto Statement para poder realizar consultas a la base de datos
+     */
     public Productos() {
         try {
             stmt = cargaVentas(false).createStatement();
@@ -25,7 +24,18 @@ public class Productos {
         }
     }
 
-
+    /**
+     * Método para insertar un producto en la base de datos
+     * Si insert es true, se inserta un nuevo producto
+     * Si insert es false, se actualiza un producto existente
+     *
+     * @param id          Identificador del producto
+     * @param nombre      Nombre del producto
+     * @param descripcion Descripción del producto
+     * @param pvp         Precio de venta al público
+     * @param insert      Indica si la operación es de inserción o actualización
+     * @return Devuelve true si la operación se ha realizado correctamente, false en caso contrario
+     */
     public boolean insertarProducto(int id, String nombre, String descripcion, int pvp, boolean insert) {
         boolean operacion = false;
         try {
@@ -48,6 +58,11 @@ public class Productos {
         return operacion;
     }
 
+    /**
+     * Método para obtener todos los productos de la base de datos
+     *
+     * @return Devuelve un ResultSet con todos los productos
+     */
     public ResultSet getAllProducts() {
         ResultSet rs = null;
         try {
@@ -58,6 +73,12 @@ public class Productos {
         return rs;
     }
 
+    /**
+     * Método para eliminar un producto de la base de datos por su identificador
+     *
+     * @param id Identificador del producto a eliminar
+     * @return Devuelve true si la operación se ha realizado correctamente, false en caso contrario
+     */
     public boolean deleteProduct(int id) {
         boolean operacion = false;
         try {
@@ -71,6 +92,12 @@ public class Productos {
 
     }
 
+    /**
+     * Método para obtener un producto de la base de datos por su identificador
+     *
+     * @param id Identificador del producto a obtener
+     * @return Devuelve un ResultSet con el producto
+     */
     public ResultSet getProducto(int id) {
         ResultSet rs = null;
         try {
@@ -82,6 +109,12 @@ public class Productos {
         return rs;
     }
 
+    /**
+     * Método para buscar un producto en la base de datos por su nombre, descripción o precio
+     *
+     * @param busqueda Cadena de texto a buscar
+     * @return Devuelve un ResultSet con los productos encontrados
+     */
     public ResultSet busquedaProducto(String busqueda) {
         ResultSet rs = null;
         boolean isNumeric = busqueda.chars().allMatch(Character::isDigit); // Comprueba si la cadena es un número
