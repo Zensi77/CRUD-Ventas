@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="febf8641-20e6-4723-8f99-510300ebdd40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/jer/base_de_datos/ventas-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/jer/base_de_datos/ventas-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/Clientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/Clientes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/InsertDatosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/InsertDatosController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/VentasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/VentasController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/queryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/queryController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +92,7 @@
       <option name="presentableId" value="Default" />
       <updated>1712914345963</updated>
       <workItem from="1712914347087" duration="12811000" />
-      <workItem from="1713113025629" duration="1472000" />
+      <workItem from="1713113025629" duration="8208000" />
     </task>
     <servers />
   </component>

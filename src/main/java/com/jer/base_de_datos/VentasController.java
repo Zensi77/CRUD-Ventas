@@ -553,6 +553,10 @@ public class VentasController {
 
         if (res == 1) {
             showAlert("Borrar Tabla", null, "Tabla borrada con éxito", Alert.AlertType.INFORMATION).showAndWait();
+
+        }
+        else if (res == 0) {
+            showAlert("Error", null, "La tabla no existe", Alert.AlertType.ERROR).showAndWait();
         } else {
             showAlert("Error", null, "Error al borrar la tabla", Alert.AlertType.ERROR).showAndWait();
         }

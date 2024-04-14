@@ -155,7 +155,7 @@ public class queryController {
             warning2.setVisible(false);
         }
 
-        if (input3.getText().isEmpty() || !input3.getText().matches("[0-9]+")) { // Solo números enteros o vacío
+        if (input3.getText().isEmpty() || (!input3.getText().matches("[0-9]+") && tipo.equals(Constants.tipoVistaProducto))) { // Solo números enteros o vacío
             warning3.setVisible(true);
             correcto = false;
         } else {

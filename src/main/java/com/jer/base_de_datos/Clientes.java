@@ -98,10 +98,21 @@ public class Clientes {
      */
     public int borrarTabla(String tabla) {
         int operacion = 1;
+        ResultSet rs;
         try {
-            stmt.execute("DROP TABLE IF EXISTS Compran"); // Borramos la tabla Compran si existe para evitar problemas de claves foráneas
+            rs = stmt.executeQuery("SHOW TABLES LIKE 'Compran'");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        boolean crear = false;
+        try {
+            if (rs.next()) {
+                stmt.execute("DROP TABLE Compran"); // Borramos la tabla Compran si existe para evitar problemas de claves foráneas
+                crear = true;
+            }
             // Asumo que si no hay clientes o productos, no va a haber compras, por lo que no es necesario borrar la tabla Compran
-            stmt.execute("DROP TABLE " + tabla);
+            if (!tabla.equals("Compran")) stmt.execute("DROP TABLE " + tabla);
             switch (tabla) {
                 case "Clientes":
                     stmt.execute("CREATE TABLE IF NOT EXISTS Clientes (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50), apellido1 VARCHAR(50), apellido2 VARCHAR(50))");
@@ -110,7 +121,8 @@ public class Clientes {
                     stmt.execute("CREATE TABLE IF NOT EXISTS Productos (id INT AUTO_INCREMENT PRIMARY KEY, nombre VARCHAR(50), descripcion VARCHAR(150), pvp INT)");
                     break;
                 case "Compran":
-                    stmt.execute("CREATE TABLE IF NOT EXISTS Compran (id INT AUTO_INCREMENT PRIMARY KEY, id_cliente INT, id_producto INT, cantidad INT, FOREIGN KEY (id_cliente) REFERENCES Clientes(id), FOREIGN KEY (id_producto) REFERENCES Productos(id)) ON DELETE CASCADE ON UPDATE CASCADE");
+                    if (crear) crearTabla();
+                    else operacion = 0;
                     break;
             }
 
@@ -180,6 +192,7 @@ public class Clientes {
     public boolean deleteClient(int id) {
         boolean operacion = false;
         try {
+            stmt.execute("DELETE FROM Compran WHERE id_cliente = " + id);
             int colAfectadas = stmt.executeUpdate("DELETE FROM Clientes WHERE id = " + id);
             if (colAfectadas >= 1) operacion = true;
         } catch (SQLException e) {

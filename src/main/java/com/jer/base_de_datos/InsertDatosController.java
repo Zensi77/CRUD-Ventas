@@ -73,7 +73,7 @@ public class InsertDatosController {
         if (campo2.getText().isEmpty()) {
             warningApe1.setVisible(true);
         }
-        if (campo3.getText().isEmpty() || !campo3.getText().matches("[0-9]+")) { // Solo números enteros o vacío
+        if (campo3.getText().isEmpty() || (!campo3.getText().matches("[0-9]+") && datos.equals(Constants.tipoVistaProducto))) { // Solo números enteros o vacío
             warningApe2.setVisible(true);
         } else if (datos.equals(Constants.tipoVistaCliente)) { // Si es un cliente
             Clientes cl = new Clientes();
