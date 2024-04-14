@@ -251,7 +251,7 @@ public class Clientes {
      * @return true si la operación se ha realizado correctamente, false si ha habido algún error
      */
     public boolean insertarCompra(int id, int idProducto, int cantidad) {
-        boolean operacion = false;
+        boolean operacion;
         try {
             int colAfectadas = stmt.executeUpdate("INSERT INTO Compran(id_cliente, id_producto, cantidad) VALUES (" + id + "," + idProducto + "," + cantidad + ")");
             if (colAfectadas >= 1) operacion = true;

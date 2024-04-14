@@ -6,15 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="febf8641-20e6-4723-8f99-510300ebdd40" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/Clientes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/Clientes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/Datos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/Datos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/InsertDatosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/InsertDatosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/Productos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/Productos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/StartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/StartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/VentasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/VentasController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/queryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/jer/base_de_datos/queryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/jer/base_de_datos/ventas-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/jer/base_de_datos/ventas-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,9 +26,9 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2ezjXeupLna72rKSSQA8J23e34m" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -44,28 +36,28 @@
     <option name="showLibraryContents" value="true" />
     <option name="showVisibilityIcons" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.HelloApplication.executor": "Run",
-    "Application.database.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "E:/1º DAW/Programacion/Tema8/Base_de_Datos",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.database.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/1º DAW/Programacion/Tema8/Base_de_Datos&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\USUARIO\Desktop\Base_datos\src\main\resources\images" />
@@ -96,7 +88,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1712914345963</updated>
-      <workItem from="1712914347087" duration="12547000" />
+      <workItem from="1712914347087" duration="12811000" />
+      <workItem from="1713113025629" duration="1472000" />
     </task>
     <servers />
   </component>

@@ -104,13 +104,13 @@
               <content>
                 <AnchorPane prefHeight="477.0" prefWidth="538.0">
                      <children>
-                        <GridPane fx:id="gridClientes" layoutX="7.0" layoutY="12.0" prefHeight="39.0" prefWidth="506.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <GridPane fx:id="gridClientes" layoutX="7.0" layoutY="12.0" prefHeight="39.0" prefWidth="473.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="65.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="104.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="147.0" minWidth="10.0" prefWidth="34.0" />
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="132.0" />
-                              <ColumnConstraints fx:id="clientes11" hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="172.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="121.0" minWidth="10.0" prefWidth="98.0" />
+                              <ColumnConstraints fx:id="clientes11" hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="128.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="151.0" minWidth="10.0" prefWidth="116.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
@@ -136,13 +136,13 @@
                                  </font></Label>
                            </children>
                         </GridPane>
-                        <GridPane fx:id="gridProductos" layoutX="-1.0" layoutY="3.0" prefHeight="55.0" prefWidth="539.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <GridPane fx:id="gridProductos" layoutX="-1.0" layoutY="3.0" prefHeight="55.0" prefWidth="889.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="-350.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="80.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="57.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="122.0" />
-                              <ColumnConstraints fx:id="clientes1" hgrow="SOMETIMES" maxWidth="205.0" minWidth="10.0" prefWidth="192.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="88.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="154.0" minWidth="10.0" prefWidth="74.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.0" minWidth="10.0" prefWidth="23.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="305.0" minWidth="10.0" prefWidth="305.0" />
+                              <ColumnConstraints fx:id="clientes1" hgrow="SOMETIMES" maxWidth="394.0" minWidth="10.0" prefWidth="388.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="145.0" minWidth="10.0" prefWidth="28.0" />
                            </columnConstraints>
                            <rowConstraints>
                               <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
@@ -173,13 +173,13 @@
                   </AnchorPane>
               </content>
             </ScrollPane>
-            <TextField fx:id="busqueda" layoutX="318.0" layoutY="11.0" prefHeight="25.0" prefWidth="194.0" promptText="Ingrese parametros de busqueda" />
-            <ImageView fx:id="busquedaImg" fitHeight="20.0" fitWidth="20.0" layoutX="518.0" layoutY="14.0" onMouseClicked="#busqueda" pickOnBounds="true" preserveRatio="true">
+            <TextField fx:id="busqueda" layoutX="318.0" layoutY="11.0" prefHeight="25.0" prefWidth="194.0" promptText="Ingrese parametros de busqueda" AnchorPane.rightAnchor="37.0" AnchorPane.topAnchor="11.0" />
+            <ImageView fx:id="busquedaImg" fitHeight="20.0" fitWidth="20.0" layoutX="518.0" layoutY="14.0" onMouseClicked="#busqueda" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="14.0">
                <image>
                   <Image url="@../../../images/busqueda.png" />
                </image>
             </ImageView>
-            <Button fx:id="guardarCompra" layoutX="249.0" layoutY="11.0" mnemonicParsing="false" onAction="#guardarCompra" style="-fx-background-color: #023e8a; -fx-background-radius: 20;" text="Agregar" textFill="WHITE">
+            <Button fx:id="guardarCompra" layoutX="249.0" layoutY="11.0" mnemonicParsing="false" onAction="#guardarCompra" style="-fx-background-color: #023e8a; -fx-background-radius: 20;" text="Agregar" textFill="WHITE" AnchorPane.rightAnchor="234.0" AnchorPane.topAnchor="11.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
